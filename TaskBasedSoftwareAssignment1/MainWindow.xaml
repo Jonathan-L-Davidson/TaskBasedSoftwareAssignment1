@@ -5,32 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskBasedSoftwareAssignment1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1080" Width="1920">
     <Window.Resources>
-        <DataTemplate x:Key="StoreTemplate"  >
+        <DataTemplate x:Key="StoreTemplate">
             <StackPanel>
                 <DockPanel>
-                    <TextBlock FontWeight="Bold" DockPanel.Dock="Left" Margin="5,0,10,0" Foreground="#FFDEDEDE">Store Code:</TextBlock>
-                    <TextBlock Text=""/> <!-- Spacer to level out the text. -->
-                    <TextBlock FontWeight="Bold" Text="{Binding Path=Value.StoreCode}" Margin="5,0,10,0" Background="{x:Null}" Foreground="#FFDEDEDE" />
+                    <TextBlock FontWeight="Bold" DockPanel.Dock="Left" Margin="5,0,10,0" Foreground="#FFDEDEDE" Text="Store Code:"/>
+                    <TextBlock Text=""/>
+                    <!-- Spacer to level out the text. -->
+                    <TextBlock FontWeight="Bold" Text="{Binding Path=Key}" Margin="5,0,10,0" Foreground="#FFDEDEDE"/>
                 </DockPanel>
                 <DockPanel>
-                    <TextBlock FontWeight="Bold" Text="Location:" DockPanel.Dock="Left" Margin="5,0,10,0" Foreground="#FF5BBD68" />
-                    <TextBlock Text=""/> <!-- Spacer to level out the text on the same line. -->
-                    <TextBlock FontWeight="Bold" Text="{Binding Path=Value.StoreLocation}"  Margin="5,0,10,0" Foreground="#FFDEDEDE" />
+                    <TextBlock FontWeight="Bold" Text="Location:" DockPanel.Dock="Left" Margin="5,0,10,0" Foreground="#FF5BBD68"/>
+                    <TextBlock Text=""/>
+                    <!-- Spacer to level out the text on the same line. -->
+                    <TextBlock FontWeight="Bold" Text="{Binding Path=Value.StoreLocation}"  Margin="5,0,10,0" Foreground="#FFDEDEDE"/>
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OrderTemplate">
+            <StackPanel>
+                <DockPanel>
+                    <TextBlock FontWeight="Bold" DockPanel.Dock="Left" Margin="5,0,10,0" Foreground="#FFDEDEDE" Text="Store Code:"/>
+                    <TextBlock Text=""/>
+                    <!-- Spacer to level out the text. -->
+                    <TextBlock FontWeight="Bold" Text="{Binding Path=Key}" Margin="5,0,10,0" Foreground="#FFDEDEDE"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock FontWeight="Bold" Text="Location:" DockPanel.Dock="Left" Margin="5,0,10,0" Foreground="#FF5BBD68"/>
+                    <TextBlock Text=""/>
+                    <!-- Spacer to level out the text on the same line. -->
+                    <TextBlock FontWeight="Bold" Text="{Binding Path=Value.StoreLocation}"  Margin="5,0,10,0" Foreground="#FFDEDEDE"/>
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
 
     <Grid Background="#FF383838">
-        <ListBox Margin="17,8,15,26"
-                 Name="storeList"
-                 Background="#FF2E2E2E"
-                 ItemsSource="{Binding stores}"
-                 SelectedValue="{Binding storeIndex}"   
-                 SelectedValuePath="Key"   
-                 SelectionMode="Multiple"
-                 ItemTemplate="{StaticResource StoreTemplate}" />
+        <Grid x:Name="StoreGrid" Margin="475,60,1018,718" RenderTransformOrigin="0.5,0.5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.445"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <ListBox
+            x:Name="storeList"
+            Background="#FF2E2E2E"
+            ItemsSource="{Binding stores}"
+            SelectedValue="{Binding storeIndex}"
+            SelectedValuePath="Key"
+            ItemTemplate="{StaticResource StoreTemplate}"
+            SelectionMode="Extended" Grid.Row="1" BorderBrush="{x:Null}"/>
+            <TextBlock x:Name="Stores" Text="Stores:" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" FontFamily="Segoe UI Semibold" Foreground="#FFDEDEDE" Background="#FF2E2E2E" VerticalAlignment="Bottom"/>
+            <Grid x:Name="Buttons" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="SelectAll" Content="Select All" Margin="2,2,2,2" Click="SelectAll_Click"/>
+                <Button x:Name="DeselectAll" Content="Deselect All" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2,2,2,2" VerticalAlignment="Stretch" Click="DeselectAll_Click"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
