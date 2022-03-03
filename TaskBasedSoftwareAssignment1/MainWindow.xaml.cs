@@ -35,7 +35,7 @@ namespace TaskBasedSoftwareAssignment1 {
 			HashSet<Date> dates = new HashSet<Date>();
 			List<Order> orders = new List<Order>();
 
-			//storeIndex = new int[256];
+			storeIndex = new int[2048];
 			InitializeComponent();
 
 			DataContext = this;
@@ -44,12 +44,17 @@ namespace TaskBasedSoftwareAssignment1 {
 			storeList.ItemsSource = stores; // Must be empty before populating, I must do what WPF demands!
 		}
 
-		private void SelectAll_Click(object sender, RoutedEventArgs e) {
+		private void StoreSelectAll_Click(object sender, RoutedEventArgs e) {
 			storeList.SelectAll();
 		}
 
-		private void DeselectAll_Click(object sender, RoutedEventArgs e) {
+		private void StoreDeselectAll_Click(object sender, RoutedEventArgs e) {
 			storeList.UnselectAll();
+		}
+
+		private void ListOrders(Date startDate, Date endDate) {
+			for (int i = 0; i < storeIndex.Count(); i++) {
+			}
 		}
 	}
 }

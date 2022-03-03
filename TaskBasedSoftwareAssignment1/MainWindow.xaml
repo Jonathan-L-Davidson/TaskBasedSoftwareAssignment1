@@ -43,7 +43,7 @@
     </Window.Resources>
 
     <Grid Background="#FF383838">
-        <Grid x:Name="StoreGrid" Margin="475,60,1018,718" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="StoreGrid" Margin="255,100,1238,678" RenderTransformOrigin="0.5,0.5">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="7*"/>
@@ -66,13 +66,13 @@
             ItemTemplate="{StaticResource StoreTemplate}"
             SelectionMode="Extended" Grid.Row="1" BorderBrush="{x:Null}"/>
             <TextBlock x:Name="Stores" Text="Stores:" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" FontFamily="Segoe UI Semibold" Foreground="#FFDEDEDE" Background="#FF2E2E2E" VerticalAlignment="Bottom"/>
-            <Grid x:Name="Buttons" Grid.Row="2">
+            <Grid x:Name="StoreButtons" Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="SelectAll" Content="Select All" Margin="2,2,2,2" Click="SelectAll_Click"/>
-                <Button x:Name="DeselectAll" Content="Deselect All" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2,2,2,2" VerticalAlignment="Stretch" Click="DeselectAll_Click"/>
+                <Button x:Name="StoreSelectAll" Content="Select All" Margin="2,2,2,2" Click="StoreSelectAll_Click"/>
+                <Button x:Name="StoreDeselectAll" Content="Deselect All" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2,2,2,2" VerticalAlignment="Stretch" Click="StoreDeselectAll_Click"/>
             </Grid>
         </Grid>
     </Grid>

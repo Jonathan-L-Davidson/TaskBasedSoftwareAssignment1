@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 public class Store {
 	public string StoreCode { get; set; }
 	public string StoreLocation { get; set; }
@@ -24,10 +25,14 @@ public class Date {
 }
 
 namespace ExampleLoadData {
+
 	public class StoreLoader {
-		static string folderPath = "StoreData";
-		static string storeCodesFile = "StoreCodes.csv";
-		static string storeDataFolder = "StoreData";
+		private static string folderPath = "StoreData";
+		private static string storeCodesFile = "StoreCodes.csv";
+		private static string storeDataFolder = "StoreData";
+
+		public static Date smallestDate = new Date();
+		public static Date highestDate = new Date();
 
 		public static void LoadData(ref Dictionary<string, Store> stores, ref HashSet<Date> dates, ref List<Order> orders) {
 			Stopwatch stopWatch = new Stopwatch();
@@ -54,6 +59,15 @@ namespace ExampleLoadData {
 				Store store = stores[fileNameSplit[0]];
 				Date date = new Date { Week = Convert.ToInt32(fileNameSplit[1]), Year = Convert.ToInt32(fileNameSplit[2]) };
 				dates.Add(date);
+				if (date.Year <= smallestDate.Year) {
+					if (date.Week < smallestDate.Week) {
+						smallestDate = date;
+					}
+				} else if (date.Year >= highestDate.Year) {
+					if (date.Week > highestDate.Week) {
+						highestDate = date;
+					}
+				}
 				//fileNameSplit[0] = store code
 				//fileNameSplit[1] = week number
 				//fileNameSplit[2] = year
