@@ -24,6 +24,23 @@
             </StackPanel>
         </DataTemplate>
 
+        <DataTemplate x:Key="WeekTemplate">
+            <StackPanel>
+                <DockPanel>
+                    <TextBlock FontWeight="Bold" DockPanel.Dock="Left" Margin="5,0,10,0" Foreground="#FFDEDEDE">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} + {1}">
+                                <Binding Path="Year" />
+                                <Binding Path="Week" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Text=""/>
+                    <!-- Spacer to level out the text. -->
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
+        
         <DataTemplate x:Key="OrderTemplate">
             <StackPanel>
                 <DockPanel>
@@ -61,10 +78,11 @@
             x:Name="storeList"
             Background="#FF2E2E2E"
             ItemsSource="{Binding stores}"
-            SelectedValue="{Binding storeIndex}"
+            SelectedValue="{Binding selectedStore}"
             SelectedValuePath="Key"
             ItemTemplate="{StaticResource StoreTemplate}"
-            SelectionMode="Extended" Grid.Row="1" BorderBrush="{x:Null}"/>
+            SelectionMode="Extended"
+            Grid.Row="1" BorderBrush="{x:Null}"/>
             <TextBlock x:Name="Stores" Text="Stores:" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" FontFamily="Segoe UI Semibold" Foreground="#FFDEDEDE" Background="#FF2E2E2E" VerticalAlignment="Bottom"/>
             <Grid x:Name="StoreButtons" Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -75,5 +93,39 @@
                 <Button x:Name="StoreDeselectAll" Content="Deselect All" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2,2,2,2" VerticalAlignment="Stretch" Click="StoreDeselectAll_Click"/>
             </Grid>
         </Grid>
+        <Grid x:Name="WeekGrid" Margin="759,100,734,678" RenderTransformOrigin="0.5,0.5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.445"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <ListBox
+                x:Name="weekList"
+                Background="#FF2E2E2E"
+                ItemsSource="{Binding displayedDates}"
+                SelectedItem ="{Binding weekIndex}"
+                SelectedValuePath="Key"
+                ItemTemplate="{StaticResource WeekTemplate}"
+                SelectionMode="Extended"
+                Grid.Row="1" BorderBrush="{x:Null}"/>
+            <TextBlock x:Name="Weeks" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" FontFamily="Segoe UI Semibold" Foreground="#FFDEDEDE" Background="#FF2E2E2E" VerticalAlignment="Bottom"><Run Language="en-gb" Text="Week"/><Run Text="s:"/></TextBlock>
+            <Grid x:Name="WeekButtons" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="WeekSelectAll" Content="Select All" Margin="2,2,2,2" Click="WeekSelectAll_Click"/>
+                <Button x:Name="WeekDeselectAll" Content="Deselect All" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2,2,2,2" VerticalAlignment="Stretch" Click="WeekDeselectAll_Click"/>
+            </Grid>
+        </Grid>
+        <Button x:Name="Update_List" Content="Update List" HorizontalAlignment="Left" Height="25" Margin="764,75,0,0" VerticalAlignment="Top" Width="196" Click="UpdateWeeks_Click"/>
     </Grid>
 </Window>
